@@ -1,0 +1,53 @@
+<mat-card>
+  <mat-progress-spinner
+    class="example-margin"
+    [color]="color"
+    [mode]="mode"
+    [value]="value"
+    *ngIf="isloaded"
+  >
+  </mat-progress-spinner>
+  <form
+    (submit)="onSaveEmployee(employeeForm)"
+    #employeeForm="ngForm"
+    *ngIf="!isloaded"
+  >
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        name="name"
+        [ngModel]="employee?.name"
+        required
+        minlength="3"
+        placeholder="Employee Name"
+        #name="ngModel"
+      />
+      <mat-error *ngIf="name.invalid">Please enter a employee name.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="tel"
+        name="content"
+        [ngModel]="employee?.content"
+        required
+        minlength="8"
+        pattern="^((?!_)[0-9])+$"
+        maxlength="10"
+        placeholder="Employee tel"
+        #content="ngModel"
+      />
+      <mat-error *ngIf="content.invalid"
+        >Please enter a employee Tel.(only numbers not less than 8 dgit and not
+        more than 10)</mat-error
+      >
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">
+      Save Employee
+    </button>
+    <button mat-raised-button color="accent" type="reset">
+      Reset
+    </button>
+  </form>
+</mat-card>
